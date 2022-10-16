@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 import app from '../firebase/Firebase.init';
 
 const auth = getAuth(app);
@@ -51,13 +52,13 @@ const RegisterReactBootstrap = () => {
             <h3 className='text-primary'>Please Register!!!</h3>
             <Form onSubmit={handleRegister}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" name='email' placeholder="Enter email" required />
+                    <Form.Label>Email Address</Form.Label>
+                    <Form.Control type="email" name='email' placeholder="Your Email" required />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" name='password' placeholder="Password" required />
+                    <Form.Control type="password" name='password' placeholder="Your Password" required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 </Form.Group>
@@ -67,6 +68,7 @@ const RegisterReactBootstrap = () => {
                     Register
                 </Button>
             </Form>
+            <small><p>If You Are Already Register.Please Ignore <Link to='/login' className='text-decoration-none'>Login</Link></p></small>
         </div>
     );
 };
