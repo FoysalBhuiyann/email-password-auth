@@ -9,16 +9,25 @@ const auth = getAuth(app);
 
 
 const RegisterReactBootstrap = () => {
-const [password, setPasswordError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
     const handleRegister = event => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
         console.log(email, password);
-        if(!/(?=.*[A-Z].*[A-Z])/.test(password)){
+        if (!/(?=.*[A-Z].*[A-Z])/.test(password)) {
             setPasswordError('Please Provide at least two uppercase')
+            return;
         }
-
+        if (password.lenght < 6) {
+            setPasswordError('Please Should be at least 6 characters.');
+            return;
+        }
+        if (!/(?=.*[!@#$&*])/.test(password)) {
+            setPasswordError('Please add at least one special character');
+            return
+        }
+        setPasswordError('')
         createUserWithEmailAndPassword(auth, email, password)
             .then(result => {
                 const user = result.user;
@@ -44,6 +53,7 @@ const [password, setPasswordError] = useState('');
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 </Form.Group>
+                <p className='text-danger'>{passwordError}</p>
                 <Button variant="primary" type="submit">
                     Register
                 </Button>
